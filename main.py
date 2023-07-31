@@ -25,8 +25,8 @@ bug_reports = [
     {'id': 'BUG-123', 'file': 'src/file1.py', 'line': 42, 'date': '2022-01-01'},
     {'id': 'BUG-456', 'file': 'src/file2.py', 'line': 23, 'date': '2022-02-01'},
     {'id': 'BUG-457', 'file': 'src/file3.py', 'line': 26, 'date': '2022-02-04'},
-    {'id': 'BUG-456', 'file': 'src/file2.py', 'line': 23, 'date': '2022-02-01'},
-    {'id': 'BUG-457', 'file': 'src/file3.py', 'line': 26, 'date': '2022-02-04'},
+    {'id': 'BUG-458', 'file': 'src/file4.py', 'line': 27, 'date': '2022-02-05'},
+    {'id1': 'BUG-459', 'file': 'src/file5.py', 'line': 28, 'date': '2022-02-06'},
     # Adicione mais relatórios de bugs conforme necessário
 ]
 
