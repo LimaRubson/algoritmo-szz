@@ -24,11 +24,6 @@ repo_path = '/caminho/para/repo'  # Substitua pelo caminho para o seu repositór
 bug_reports = [
     {'id': 'BUG-123', 'file': 'src/file1.py', 'line': 42, 'date': '2022-01-01'},
     {'id': 'BUG-456', 'file': 'src/file2.py', 'line': 23, 'date': '2022-02-01'},
-    {'id': 'BUG-457', 'file': 'src/file3.py'},
-    {'id11': 'BUG-458', 'file': 'src/file4.py', 'line': 27, 'date': '2022-02-05'},
-    {'id11': 'BUG-459', 'file': 'src/file5.py', 'line': 28, 'date': '2022-02-06'},
-    # Adicione mais relatórios de bugs conforme necessário
-]
 
 bug_introducing_commits = get_bug_introducing_commits(repo_path, bug_reports)
 print("Bug-introducing commits:")
