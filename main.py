@@ -24,7 +24,7 @@ repo_path = '/caminho/para/repo'  # Substitua pelo caminho para o seu repositór
 bug_reports = [
     {'id': 'BUG-123', 'file': 'src/file1.py', 'line': 42, 'date': '2022-01-01'},
     {'id': 'BUG-456', 'file': 'src/file2.py', 'line': 23, 'date': '2022-02-01'},
-    {'id': 'BUG-457', 'file': 'src/file2.py', 'line': 26, 'date': '2022-02-04'},
+    {'id': 'BUG-457', 'file': 'src/file3.py', 'line': 26, 'date': '2022-02-04'},
     # Adicione mais relatórios de bugs conforme necessário
 ]
 
