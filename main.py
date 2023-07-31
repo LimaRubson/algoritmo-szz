@@ -22,8 +22,6 @@ def get_bug_introducing_commits(repo_path, bug_reports):
 # Exemplo de uso
 repo_path = '/caminho/para/repo'  # Substitua pelo caminho para o seu repositório
 bug_reports = [
-    {'id': 'BUG-123', 'file': 'src/file1.py', 'line': 42, 'date': '2022-01-01'},
-    {'id': 'BUG-456', 'file': 'src/file2.py', 'line': 23, 'date': '2022-02-01'},
 
 bug_introducing_commits = get_bug_introducing_commits(repo_path, bug_reports)
 print("Bug-introducing commits:")
