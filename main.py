@@ -17,7 +17,7 @@ def get_bug_introducing_commits(repo_path, bug_reports):
                 # Adicionar o commit à lista de commits que introduziram bugs
                 bug_introducing_commits.append(commit.hexsha)
 
-    return bug_introducing_commits
+    return bug_introducing
 
 # Exemplo de uso
 repo_path = '/caminho/para/repo'  # Substitua pelo caminho para o seu repositório
