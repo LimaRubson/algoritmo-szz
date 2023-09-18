@@ -5,7 +5,7 @@ def get_bug_introducing_commits(repo_path, bug_reports):
     bug_introducing_commits = []
 
     for bug_report in bug_reports:
-        bug_id = bug_report['']
+        bug_id = bug_report[''
         bug_file = bug_report['file']
         bug_line = bug_report['line']
 
