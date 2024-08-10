@@ -2,7 +2,7 @@ from git import Repo
 
 def get_bug_introducing_commits(repo_path, bug_reports):
     repo = Repo(repo_path)
-    bug_introducing_commits = 
+    bug_introducing_commits = []
 
     for bug_report in bug_reports:
         bug_id = bug_report
