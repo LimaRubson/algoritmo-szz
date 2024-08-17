@@ -13,7 +13,7 @@ def get_bug_introducing_commits(repo_path, bug_reports):
         blame_result = repo.blame('HEAD', bug_file, L=bug_line)
         for commit, lines in blame_result:
             # Verificar se o commit é anterior ao bug report
-            if commit.committed_datetime < bug_report['date':
+            if commit.committed_datetime < bug_report['date']:
                 # Adicionar o commit à lista de commits que introduziram bugs
                 bug_introducing_commits.append(commit.hexsha)
 
