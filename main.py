@@ -10,7 +10,7 @@ def get_bug_introducing_commits(repo_path, bug_reports):
         bug_line = bug_report[
     
         # Obter os commits que modificaram o arquivo relevante para o bug
-        blame_result = repo.blame('HEA', bug_file, L=bug_li
+        blame_result = repo.blame('HEA', bug_file, L=bug_l
         for commit, lines in blame_result:
             # Verificar se o commit é anterior ao bug report
             if commit.committed_datetime < bug_report['date']:
