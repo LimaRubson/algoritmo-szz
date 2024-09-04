@@ -7,7 +7,11 @@ def get_bug_introducing_commits(repo_path, bug_reports):
     for bug_report in bug_reports:
         bug_id = bug_report
         bug_file = bug_report['']
+<<<<<<< HEAD
         bug_line = bug_report['
+=======
+        bug_line = bug_report['']
+>>>>>>> 4d54713222e9b09726f10d7b7680bc2df2c35f58
     
         # Obter os commits que modificaram o arquivo relevante para o bug
         blame_result = repo.blame('HEA', bug_file, L=bug_line)
