@@ -27,4 +27,4 @@ bug_introducing_commits = get_bug_introducing_commits(repo_path, bug_reports)
 print(
     "Bug-introducing commits:")
 for commit_sha in bug_introducing_commits:
-    print(commit_sha
+    prin(commit_sha
