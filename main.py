@@ -46,12 +46,12 @@ const App = () => {
     };
 
    
-  }, []);
+  }, [);
 
   const fetchCommits = async () => {
     try {
       const response = await axios.get('http://3.94.86.29:8000/api/commits');
-      console.log('Dados recebidos:', response.data);
+      console.log('Dados recebidos:', 
       setCommits(response.data);
       setLoading(false);
     } catch (error) {
@@ -64,8 +64,8 @@ const App = () => {
 
   const fetchMetrics = async () => {
     try {
-      const response = await axios.get('http://3.94.86.29:8000/api/evaluation_metrics');
-      console.log('Dados recebidos:', response.data);
+      const response = await axios.get('http://3.94.86.29:8000/api/evaluation_metrics
+      console.log('Dados recebidos:, response.data);
       setMetrics(response.data);
       setLoading(false);
     } catch (error) {
@@ -87,9 +87,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
-        {notification && <div className="notification">{notification}</div>} {/* Exibe a notificação se existir */}
+        {notification && <div className="notification>{notification}</div>} {/* Exibe a notificação se existir */}
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/listusers" element={<ListUsers sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} />} />
@@ -97,8 +97,8 @@ const App = () => {
           <Route path='/home' element={<Home sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
           <Route path='/commits' element={<Commit sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
           <Route path='/ia' element={<Ia sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
-          <Route path='/config' element={<Config_file />} />
-          <Route path='*' element={<h1>Not Found</h1>} />
+          <Route path='/config' element={<Config_file
+          <Route path='*' element={<h1>Not Found
         </Routes>
       </div>
     </BrowserRouter>
