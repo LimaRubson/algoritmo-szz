@@ -1,30 +1,108 @@
-from git import Repo
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
+import Commit from './components/pages/Commit';
+import Ia from './components/pages/Ia';
+import Home from './components/pages/Home';
+import LandingPage from './components/pages/LandingPage';
+import LoginPage from './components/pages/LoginPage';
+import RegisterPage from './components/pages/RegisterPage';
+import ListUsers from './components/users/Users';
+import CreateUser from './components/users/CreateUser';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Config_file from './Config_file';
 
-def get_bug_introducing_commits(repo_path, bug_reports):
-    repo = Repo(repo_path)
-    bug_introducing_commits = []
+const App = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
-    for bug_report in bug_reports:
-        bug_id = bug_report
-        bug_file = bug_report['']
-        bug_line = bug_report
-    
-        # Obter os commits que modificaram o arquivo relevante para o bug
-        blame_result = repo.blame('HEA', bug_file, L=bug_line)
-        for commit, lines in blame_result:
-            # Verificar se o commit é anterior ao bug report
-            if commit.committed_datetime < bug_report['date']:
-                # Adicionar o commit à lista de commits que introduziram bugs
-                bug_introducing_commits.append(commit.hexsha)
+  const [commits, setCommits] = useState([]);
+  const [metrics, setMetrics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [notification, setNotification] = useState(null);  // Novo estado para armazenar a notificação
 
-    return bug_introducing_commits
+  useEffect(() => {
+    fetchCommits();
+    fetchMetrics();
 
-# Exemplo de uso
-repo_path  '/caminho/para/repo  # Substitua pelo caminho para o seu repositório
-bug_reports = [
+    // WebSocket connection
+    const ws = new WebSocket('ws://localhost:3000');  // Substitua pelo URL correto do WebSocket
 
-bug_introducing_commits = get_bug_introducing_commits(repo_path, bug_reports)
-print(
-    "Bug-introducing commits:")
-for commit_sha in bug_introducing_commits:
-    prin(
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'PREDICTION_RESULT') {
+        setNotification(`Commit ${data.commit_id}: Predição Concluída - ${data.prediction}`);
+      }
+    };
+
+    ws.onclose = () => {
+      console.log('WebSocket Disconnected');
+    };
+
+   
+  }, []);
+
+  const fetchCommits = async () => {
+    try {
+      const response = await axios.get('http://3.94.86.29:8000/api/commits');
+      console.log('Dados recebidos:', response.data);
+      setCommits(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao buscar commits:', error.message);
+      console.error('Detalhes do erro:', error.response ? error.response.data : 'Sem resposta do servidor');
+      setError('Erro ao buscar commits');
+      setLoading(false);
+    }
+  };
+
+  const fetchMetrics = async () => {
+    try {
+      const response = await axios.get('http://3.94.86.29:8000/api/evaluation_metrics');
+      console.log('Dados recebidos:', response.data);
+      setMetrics(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao buscar commits:', error.message);
+      console.error('Detalhes do erro:', error.response ? error.response.data : 'Sem resposta do servidor');
+      setError('Erro ao buscar commits');
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <BrowserRouter>
+      <div>
+        {notification && <div className="notification">{notification}</div>} {/* Exibe a notificação se existir */}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/listusers" element={<ListUsers sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} />} />
+          <Route path="/addnewuser" element={<CreateUser />} />
+          <Route path='/home' element={<Home sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
+          <Route path='/commits' element={<Commit sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
+          <Route path='/ia' element={<Ia sidebarOpen={sidebarOpen} openSidebar={openSidebar} closeSidebar={closeSidebar} commits={commits} metrics={metrics} />} />
+          <Route path='/config' element={<Config_file />} />
+          <Route path='*' element={<h1>Not Found</h1>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default App;
