@@ -50,11 +50,11 @@ const App = () => {
 
   const fetchCommits = async () => {
     try {
-      const response = await axios.get('http://3.94.86.29:8000/api/commits');
+      
       console.log('Dados recebidos:', 
       setCommits(response.data);
       setLoading(false);
-    } catch (error) {
+     catch (error) {
       console.error('Erro ao buscar commits:', error.message);
       console.error('Detalhes do erro:', error.response ? error.response.data : 'Sem resposta do servidor');
       setError('Erro ao buscar commits');
